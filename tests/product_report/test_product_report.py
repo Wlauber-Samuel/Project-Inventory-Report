@@ -29,13 +29,19 @@ def test_product_report() -> None:
         "manufacturing_date": "2023-07-17",
         "expiration_date": "2023-12-31",
         "serial_number": "1793ZTM",
-        "storage_instructions": "Lorem ipsum dolor sit amet.",
+        "storage_instructions": "Lorem ipsum dolor sit amet",
     }
     product = Product(**product_data)
+
     expected_report = (
-        "The product {id} - {product_name} with serial number {serial_number} "
-        "manufactured on {manufacturing_date} by the company {company_name} "
-        "valid until {expiration_date} must be stored according to"
-        "the following instructions: {storage_instructions}"
-    ).format(**product_data)
-    assert str(product) == expected_report
+        f"The product {product_data['id']} - {product_data['product_name']} "
+        f"with serial number {product_data['serial_number']} manufactured on "
+        f"{product_data['manufacturing_date']} by the company "
+        f"{product_data['company_name']} valid until "
+        f"{product_data['expiration_date']} must be stored according to "
+        f"the following instructions: {product_data['storage_instructions']}."
+    )
+
+    product_str = str(product)
+
+    assert product_str == expected_report
